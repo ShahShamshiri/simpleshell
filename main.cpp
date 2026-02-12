@@ -1,17 +1,40 @@
-#include <iostream>
+#include <sstream>
+#include<vector>
 #include <string>
+#include <iostream>
+using namespace std;
+
+vector<string> split(const string& line) {
+    istringstream iss(line);
+    vector<string> tokens;
+    string token;
+
+    while (iss >> token) {
+        tokens.push_back(token);
+    }
+    return tokens;
+}
+
+
 int main() {
 
     while(true) {
-        std::cout << "$ ";
-        std::cout.flush();
+        cout << "$ ";
+        cout.flush();
 
-        std::string line;
-        if (!std::getline(std::cin, line)) {
+        string line;
+        if (!getline(cin, line)) {
             break;
         }
+        auto args = split(line);
 
-        std::cout << "Repeated: " << line <<std::endl;
+        if (args.empty()) {
+            continue;
+        }
+        cout << "Tokens: " << endl;
+        for (auto arg : args) {
+            cout << arg << "." << endl;
+        }
 
     }
 
